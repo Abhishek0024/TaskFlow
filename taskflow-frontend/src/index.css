@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-retro-pink bg-opacity-20 text-retro-black font-mono antialiased;
+    /* Custom scrollbar for brutalist feel */
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-retro-white border-l-2 border-retro-black;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-retro-pink border-2 border-retro-black;
+  }
+}
+
+@layer components {
+  .brutal-border {
+    @apply border-2 border-retro-black;
+  }
+  
+  .brutal-shadow {
+    @apply shadow-brutal;
+  }
+  
+  .brutal-shadow-sm {
+    @apply shadow-brutal-sm;
+  }
+  
+  .brutal-active {
+    @apply active:translate-x-[4px] active:translate-y-[4px] active:shadow-none transition-all duration-75;
+  }
+  
+  .brutal-btn-active {
+    @apply hover:bg-opacity-90 active:translate-x-[2px] active:translate-y-[2px] active:shadow-none transition-all duration-75;
+  }
+}

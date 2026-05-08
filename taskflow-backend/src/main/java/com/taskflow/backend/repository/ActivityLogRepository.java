@@ -1,0 +1,12 @@
+package com.taskflow.backend.repository;
+
+import com.taskflow.backend.entity.ActivityLog;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface ActivityLogRepository extends JpaRepository<ActivityLog, Long> {
+    List<ActivityLog> findTop10ByOrderByCreatedAtDesc();
+    List<ActivityLog> findDistinctTop10ByProjectMembersIdOrderByCreatedAtDesc(Long memberId);
+    void deleteByProjectId(Long projectId);
+}
