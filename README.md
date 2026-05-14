@@ -208,3 +208,36 @@ cd taskflow-frontend
 npx.cmd eslint src
 npm.cmd run build
 ```
+
+## EC2 Deployment
+
+The project includes scripts to automate native deployment on an Ubuntu EC2 instance.
+
+### 1. Initial Setup
+On a fresh EC2 instance, clone the repository and run the setup script to install dependencies (Java, Node.js, Nginx, PostgreSQL):
+```bash
+chmod +x setup-ec2.sh
+sudo ./setup-ec2.sh
+```
+
+### 2. Configuration
+Copy the `.env.example` to `.env` in the project root and configure it with your EC2 Public IP or domain name:
+```bash
+cp .env.example .env
+nano .env
+```
+Copy the Nginx configuration and systemd service:
+```bash
+sudo cp taskflow-frontend/nginx.conf /etc/nginx/sites-available/default
+sudo cp taskflow-backend/taskflow-backend.service /etc/systemd/system/
+sudo systemctl enable taskflow-backend
+```
+
+### 3. Deploy
+Run the deployment script to pull the latest changes, build the backend and frontend, and restart the services:
+```bash
+chmod +x deploy.sh
+./deploy.sh
+```
+
+> **Note:** Ensure that ports `80` (HTTP) and `8080` (Backend API) are allowed in your AWS EC2 Security Group Inbound Rules.
