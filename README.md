@@ -53,13 +53,17 @@ TaskFlow/
 
 The backend expects PostgreSQL to be running locally.
 
-Default database settings are in `taskflow-backend/src/main/resources/application.properties`:
+Configuration is read from environment variables with local defaults in `taskflow-backend/src/main/resources/application.properties`:
 
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/taskflow
-spring.datasource.username=postgres
-spring.datasource.password=Admin
-spring.jpa.hibernate.ddl-auto=update
+DB_URL=jdbc:postgresql://localhost:5432/taskflow
+DB_USERNAME=postgres
+DB_PASSWORD=Admin
+CORS_ALLOWED_ORIGINS=http://localhost:5173
+JWT_SECRET=supersecretkeysupersecretkeysupersecretkeysupersecretkey
+JWT_EXPIRATION_MS=86400000
+JPA_DDL_AUTO=update
+JPA_SHOW_SQL=true
 ```
 
 Create the database if it does not exist:
@@ -86,6 +90,18 @@ The backend runs on:
 
 ```text
 http://localhost:8080
+```
+
+For EC2, set environment variables before starting the backend. Example:
+
+```bash
+export DB_URL=jdbc:postgresql://YOUR_DB_HOST:5432/taskflow
+export DB_USERNAME=taskflow_user
+export DB_PASSWORD=change_me
+export CORS_ALLOWED_ORIGINS=http://YOUR_EC2_PUBLIC_IP,http://YOUR_DOMAIN
+export JWT_SECRET=replace_with_a_long_random_secret_at_least_32_chars
+export JWT_EXPIRATION_MS=86400000
+java -jar target/backend-0.0.1-SNAPSHOT.jar
 ```
 
 ## Frontend Setup
@@ -124,6 +140,25 @@ The frontend runs on:
 http://localhost:5173
 ```
 
+Create a local frontend env file from the example:
+
+```bash
+cd taskflow-frontend
+copy .env.example .env
+```
+
+Set the backend URL for the environment:
+
+```properties
+VITE_API_BASE_URL=http://localhost:8080
+```
+
+For EC2 or a deployed backend, set it before building:
+
+```properties
+VITE_API_BASE_URL=http://YOUR_EC2_PUBLIC_IP:8080
+```
+
 ## API Overview
 
 ### Auth
@@ -155,8 +190,8 @@ http://localhost:5173
 ## Local Development Notes
 
 - The frontend stores the JWT and user object in `localStorage`.
-- The backend uses `spring.jpa.hibernate.ddl-auto=update`, so new tables are created automatically during development.
-- CORS is configured for `http://localhost:5173`.
+- The backend uses `JPA_DDL_AUTO=update` by default, so new tables are created automatically during development.
+- CORS is configured through `CORS_ALLOWED_ORIGINS`.
 - Members only receive data for projects where they are listed in `project_members`.
 
 ## Verification Commands
