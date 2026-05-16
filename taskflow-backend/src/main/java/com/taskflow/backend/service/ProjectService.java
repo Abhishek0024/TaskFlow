@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
@@ -82,7 +83,6 @@ public class ProjectService {
         );
     }
 
-    @Transactional
     public void deleteProject(Long projectId) {
         Project project = projectRepository.findById(projectId)
                 .orElseThrow(() -> new RuntimeException("Project not found"));
