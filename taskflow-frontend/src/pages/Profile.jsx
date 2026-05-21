@@ -14,7 +14,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 h-full items-start w-full">
+    <div className="flex flex-col-reverse lg:flex-row gap-6 h-full items-start w-full">
       {/* Left Sidebar */}
       <div className="flex flex-col gap-6 w-full lg:w-[320px] shrink-0">
         {/* System Activity */}

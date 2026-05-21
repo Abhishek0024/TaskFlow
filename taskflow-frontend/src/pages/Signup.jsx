@@ -34,7 +34,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen bg-retro-pink bg-opacity-40 flex items-center justify-center p-2 sm:p-4">
+    <div className="min-h-[100dvh] bg-retro-pink bg-opacity-40 flex items-center justify-center p-2 sm:p-4 overflow-x-hidden">
       <WindowPanel title="TaskFlow Signup" type="main" className="w-full max-w-md">
         <div className="flex flex-col items-center mb-4 max-[720px]:mb-3">
           <div className="bg-retro-yellow p-3 max-[720px]:p-2 brutal-border brutal-shadow-sm -rotate-3 mb-3 max-[720px]:mb-2">

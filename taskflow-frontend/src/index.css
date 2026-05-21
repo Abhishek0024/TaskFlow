@@ -8,16 +8,24 @@
     /* Custom scrollbar for brutalist feel */
   }
 
-  ::-webkit-scrollbar {
-    width: 12px;
-  }
+  @media (min-width: 768px) {
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
 
-  ::-webkit-scrollbar-track {
-    @apply bg-retro-white border-l-2 border-retro-black;
-  }
+    ::-webkit-scrollbar-track {
+      @apply bg-retro-white border-l-2 border-retro-black;
+    }
 
-  ::-webkit-scrollbar-thumb {
-    @apply bg-retro-pink border-2 border-retro-black;
+    ::-webkit-scrollbar-thumb {
+      @apply bg-retro-pink border-2 border-retro-black;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 }
 
