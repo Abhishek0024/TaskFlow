@@ -14,9 +14,9 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-row gap-6 h-full items-start w-full">
+    <div className="flex flex-col lg:flex-row gap-6 h-full items-start w-full">
       {/* Left Sidebar */}
-      <div className="flex flex-col gap-6 w-[320px] shrink-0">
+      <div className="flex flex-col gap-6 w-full lg:w-[320px] shrink-0">
         {/* System Activity */}
         <WindowPanel 
           title="SYSTEM ACTIVITY" 
@@ -74,8 +74,8 @@ const Profile = () => {
           headerClassName="bg-retro-black text-white tracking-wider"
         >
           {/* Header Profile Area */}
-          <div className="flex gap-8 items-center mb-6">
-            <div className="relative shrink-0">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-8 items-start md:items-center mb-6">
+            <div className="relative shrink-0 self-center md:self-auto">
               <div className="w-24 h-24 border-2 border-retro-black brutal-shadow overflow-hidden relative bg-[#ecd1b4]">
                 {/* Simulated two-tone background */}
                 <div className="absolute top-0 left-0 w-full h-full bg-[#f1a499]" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}></div>
@@ -165,14 +165,14 @@ const Profile = () => {
           </div>
 
           {/* Footer Actions */}
-          <div className="border-t-2 border-retro-black pt-4 flex justify-between mt-auto">
-            <button className="px-6 py-2 bg-retro-black text-white font-bold border-2 border-retro-black brutal-shadow-sm brutal-btn-active uppercase tracking-wider text-xs">
+          <div className="border-t-2 border-retro-black pt-4 flex flex-col md:flex-row gap-4 md:gap-0 justify-between mt-auto">
+            <button className="px-6 py-2 bg-retro-black text-white font-bold border-2 border-retro-black brutal-shadow-sm brutal-btn-active uppercase tracking-wider text-xs w-full md:w-auto">
               Save Changes
             </button>
             <button
               type="button"
               onClick={handleLogout}
-              className="px-4 py-2 bg-retro-white text-retro-black font-bold border-2 border-retro-black brutal-shadow-sm brutal-btn-active flex items-center gap-2 uppercase tracking-wider text-xs"
+              className="px-4 py-2 bg-retro-white text-retro-black font-bold border-2 border-retro-black brutal-shadow-sm brutal-btn-active flex items-center justify-center gap-2 uppercase tracking-wider text-xs w-full md:w-auto"
             >
                <LogOut size={14} /> Logout
             </button>

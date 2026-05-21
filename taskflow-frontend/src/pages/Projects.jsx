@@ -65,7 +65,7 @@ const Projects = () => {
 
   return (
     <div>
-      <div className="flex justify-between items-end mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-6 gap-4">
         <div>
           <h2 className="text-2xl font-bold mb-1">Active Projects</h2>
           <p className="text-sm">
@@ -75,7 +75,7 @@ const Projects = () => {
           </p>
         </div>
         {user?.role === 'ADMIN' && (
-          <RetroButton className="flex items-center gap-2" onClick={() => setIsModalOpen(true)}>
+          <RetroButton className="flex items-center gap-2 w-full md:w-auto justify-center" onClick={() => setIsModalOpen(true)}>
             <span className="text-xl leading-none">+</span> Create Project
           </RetroButton>
         )}

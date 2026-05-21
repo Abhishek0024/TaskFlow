@@ -129,10 +129,10 @@ const ProjectDetails = () => {
   ];
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)]">
-      <div className="flex gap-4 h-full">
+    <div className="flex flex-col h-[calc(100vh-140px)] md:h-[calc(100vh-140px)] min-h-screen md:min-h-0">
+      <div className="flex flex-col md:flex-row gap-4 h-full">
         {/* Left Sidebar - Team Members */}
-        <WindowPanel title="TEAM MEMBERS" type="card" className="w-64 shrink-0 bg-retro-white flex flex-col">
+        <WindowPanel title="TEAM MEMBERS" type="card" className="w-full md:w-64 shrink-0 bg-retro-white flex flex-col h-[250px] md:h-auto">
           <div className="flex-1 overflow-y-auto pr-2 pb-4 flex flex-col gap-3">
             {teamMembers.map((member, index) => (
               <div key={`${member.name}-${index}`} className="flex items-center gap-3 p-2 border-2 border-retro-black bg-white">
@@ -157,14 +157,14 @@ const ProjectDetails = () => {
         {/* Main Content Area */}
         <div className="flex-1 flex flex-col min-w-0 relative">
           {/* Project Header */}
-          <div className="bg-retro-pink border-2 border-retro-black p-4 mb-4 flex justify-between items-center brutal-shadow-sm">
+          <div className="bg-retro-pink border-2 border-retro-black p-4 mb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 brutal-shadow-sm">
             <div>
               <h2 className="text-2xl font-bold mb-1">Project Workspace</h2>
               <p className="text-sm">
                 {isAdmin ? `Manage tasks for project ${id}.` : `Work the board for your assigned project ${id}.`}
               </p>
             </div>
-            <button onClick={() => setIsModalOpen(true)} className="bg-white border-2 border-retro-black px-4 py-2 font-bold flex items-center gap-2 brutal-btn-active">
+            <button onClick={() => setIsModalOpen(true)} className="w-full md:w-auto bg-white border-2 border-retro-black px-4 py-2 font-bold flex justify-center items-center gap-2 brutal-btn-active">
               <span>+</span> NEW TASK
             </button>
           </div>
@@ -266,19 +266,25 @@ const ProjectDetails = () => {
 
           {/* Kanban Board */}
           <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-            <div className="flex-1 grid grid-cols-3 gap-4 min-h-0">
+            <div className="flex-1 flex overflow-x-auto md:grid md:grid-cols-3 gap-4 min-h-0 pb-4 md:pb-0 snap-x">
               
-              <DroppableColumn id="TODO" title="TODO" titleClassName="bg-retro-black">
-                {todoTasks.map(task => <DraggableTask key={task.id} task={task} />)}
-              </DroppableColumn>
+              <div className="w-[85vw] md:w-auto shrink-0 snap-center flex flex-col">
+                <DroppableColumn id="TODO" title="TODO" titleClassName="bg-retro-black">
+                  {todoTasks.map(task => <DraggableTask key={task.id} task={task} />)}
+                </DroppableColumn>
+              </div>
 
-              <DroppableColumn id="IN_PROGRESS" title="IN PROGRESS" titleClassName="bg-gray-500">
-                {inProgressTasks.map(task => <DraggableTask key={task.id} task={task} />)}
-              </DroppableColumn>
+              <div className="w-[85vw] md:w-auto shrink-0 snap-center flex flex-col">
+                <DroppableColumn id="IN_PROGRESS" title="IN PROGRESS" titleClassName="bg-gray-500">
+                  {inProgressTasks.map(task => <DraggableTask key={task.id} task={task} />)}
+                </DroppableColumn>
+              </div>
 
-              <DroppableColumn id="DONE" title="DONE" titleClassName="bg-gray-400">
-                {doneTasks.map(task => <DraggableTask key={task.id} task={task} />)}
-              </DroppableColumn>
+              <div className="w-[85vw] md:w-auto shrink-0 snap-center flex flex-col">
+                <DroppableColumn id="DONE" title="DONE" titleClassName="bg-gray-400">
+                  {doneTasks.map(task => <DraggableTask key={task.id} task={task} />)}
+                </DroppableColumn>
+              </div>
               
             </div>
           </DndContext>
